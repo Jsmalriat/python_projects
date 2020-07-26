@@ -1,4 +1,4 @@
-# Python projects
+# Python Projects
 Author: Jonah Malriat
 #
 #
