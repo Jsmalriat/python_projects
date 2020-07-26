@@ -1,5 +1,5 @@
 # Python projects
-# Author: Jonah Malriat
+Author: Jonah Malriat
 #
 #
 # Project 1: Dice Roll Generator
