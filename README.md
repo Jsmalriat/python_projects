@@ -11,9 +11,11 @@ A project using nested methods and user input to make a password checker which o
 
 
 # Project 3: State Quiz
+A project using imported data from an unsorted text document to create a quiz on states and capitals. The program imports the list of names from a text document, then sorts them into the correct categories as either states or capitals. Once these are sorted, the program asks the user if they would like to be quizzed on states or their capitals. After the user decides, either a state or a capital will pop up. The user will then input a response and the program will tell them if they are correct or incorrect. The program then asks them if they would like to play again, and continues on the same topic. At any time the user may leave the program or keep asking for more questions.
 
 
 # Project 4: Coding Theory
+A project showing how Coding Theory works by detecting and correcting possible errors in codewords inputted by a user using Hamming codes. User must understand binary and perfect codes in order to understand how the program is working and what it is doing. 
 
 
 # Misc:
