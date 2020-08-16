@@ -1,0 +1,326 @@
+Author: Jonah Malriat
+Date: 04/24/2020
+Section: 006
+Class: Mathematical Concepts 1166
+Contact: Tuf73590@temple.edu
+
+
+EXERCISES
+
+1)
+  a. No, there is an even number of 1's yet it ends with a 1.
+  b. Yes, there is an even number of 1's and it ends with a 0.
+  c. Yes, there is an odd number of 1's and it ends with a 1.
+  d. Yes, there is an even number of 1's and it ends with a 0.
+
+
+2)
+  a. 5
+  b. 3
+  c. 4
+  d. 6
+
+
+3)
+  a. 0.951 or (0.99^5)
+  b. 0.009606 or (0.99^4)(0.01)
+  c. 0.000097 or (0.99^3)(0.01^2)
+  d. 0.00000098 or (0.99^2)(0.01^3)
+  e. 0.9606 or (0.99^5) + (0.99^4)(0.01)
+
+
+4)
+  a. detect 7, correct 3
+  b. detect 3, correct 1
+  c. detect 5, correct 2
+
+
+5)
+  1 - 0.001^5(1 - 0.001)^3 or 0.999999999999999902997
+
+
+6)
+  A binary code can detect up to k errors in any codeword if and only if d(C) >= k + 1.
+  A binary code can correct up to k errors in any codeword if and only if d(C) >= 2k + 1.
+  Suppose the minimum distance between codewords is 4, it is possible to correct an error in a single bit and
+  detect two bit errors without correction.
+  Given a codeword C, and the minimum dictance of 4, 4 >= k + 1 if k is the amount of errors we can detect. 
+  When simplified, 3 >= k means up to 3 errors can be detected without correction and 3 > 2.
+  Given a codeword C, and the minimum dictance of 4, 4 >= 2k + 1 if k is the amount of errors we can correct.
+  When simplified, 1 >= k means that one error can be corrected.
+
+
+7)
+  n = 9, 5 = 2k + 1 so k = 2.
+  2^9 / C(9,0), C(9,1), C(9,2) = 32 codewords.
+
+
+8)
+  Known as a trivial perfect code, all odd positive integers of length with two 
+  bit strings containing either all 1's or all 0's work out to be perfect codes.
+  For example {00000, 11111} n = 5, 5 = 2k + 1 so k = 2. 2^5 / C(5,0), C(5,1), C(5,2) = 2. 
+  Because there are two bit strings this is a perfect code. Another example would be 
+  {00000000000000000, 11111111111111111} n = 17, 17 = 2k + 1 so k = 8. 2^17 / C(17,0), C(17,1),... C(17,8) = 2.
+  This also works out to be a perfect code because the result is two and there are two bit strings.
+
+
+9)
+  Suppose the length we are working with is 5 and the bit strings are {01010, 10100} or x and y respectively. w(x + y) = w(x) + w(y) - 2m where m 
+  is the number of shared 1's. w(x + y) = 2 + 2 - 2(0) = 4. To check we can assert that w(x + y) = d(x,y) which is also 4 so we know its correct. 
+
+
+10)
+      1  1  0  0  0
+      1  0  1  0  0
+ H =  1  0  0  1  0
+      1  0  0  0  1
+
+
+11)
+      1  0  0  1  0  0  1  0  0
+ G =  0  1  0  0  1  0  0  1  0
+      0  0  1  0  0  1  0  0  1
+
+
+12)
+      1  1  1  1  0  0  0
+ H =  1  0  1  0  1  0  0
+      0  1  1  0  0  1  0
+      1  1  0  0  0  0  1
+
+
+13)
+      1  0  0  1  0
+ G =  0  1  0  1  1
+      0  0  1  0  1
+
+
+14)
+  0000000, 0001111, 0010110, 0011111, 0100101, 0101111, 0110111, 0111111,
+  1000011, 1001111, 1010111, 1011111, 1100111, 1101111, 1110111, 1111111
+
+
+15)
+  a. A binary code of minimum distance d can correct d − 1 erasures.
+     Suppose we have the code {00000000, 01010101, 10101010, 11111111} with a minimum distance d = 4.
+     Erasures that can be corrected or r is equal to d - 1. r + 1 = 4 therefore r = 5. So if we are 
+     sent the code word 0xxxxx01 assuming no errors we can easily detect that the code sent was 01010101.  
+
+  b. A binary code of minimum distance d can correct t errors and r erasures if d = 2t + r + 1.
+     Using the same code as above we can determine 4 = 2t + r + 1 which equals 3 = 2t + r.
+     So we can determine that the code can correct one error and replace one erasure accurately. 
+     For example, 011x0101 could be decoded as 01010101, however 011x1101 could not because it can
+     neither be accurately stated as 11111111 or 01010101 due to too many errors.
+
+
+
+PROGRAMS
+(Written in Python 3.81, copy paste into .py file to run.)
+
+
+
+1) Given a binary code (user input), determine the number of errors it can correct and the number of errors it can detect.
+
+def main():
+    codewords = int(amount_of_codewords())
+    code = []
+    code = list_of_codewords(code, codewords)
+    print(code)
+    num_detect = int(detect(code, codewords))
+    num_correct = int(correct(code, codewords))
+    print(f"This code can detect up to {num_detect} errors and correct up to {num_correct} errors.")
+
+def amount_of_codewords():
+    x = int(0)
+    while x < 1:
+        codewords = int(input("""How many codewords will this code contain? 
+=> """))
+        if (codewords <= 0):
+            print("Number of codewords must be a positive integer.")
+        else:
+            return codewords 
+
+def list_of_codewords(code, codewords):
+    print("\nType each of the codewords and press Enter until all codewords have been entered.")
+    binary = {'0', '1'}
+    x = int(0)
+    while (x < 1):
+        cword1 = str(input("=> "))
+        string = set(cword1)
+        if (string == binary) or (string == {'1'}) or (string == {'0'}):
+            length = int(len(cword1))
+            code.append(cword1)
+            x = (x + 1)
+        else:
+            print("Codewords must be in a binary format.")
+    y = int(0)
+    while y < (codewords - 1):
+        cword = str(input("=> "))
+        string = set(cword)
+        if len(cword) != length:
+            print("""I'm sorry, all codewords must be the same length in order to determine minimum distance. Try again.""")
+        else:
+            if (string == binary) or (string == {'1'}) or (string == {'0'}):
+                if cword == cword1:
+                    print("Codewords must be unique.")
+                else:
+                    length = int(len(cword))
+                    code.append(cword)
+                    y = int(y + 1)
+            else:
+                print("Codewords must be in a binary format.")
+    return code
+    
+def detect(code, codewords):
+    min_dist_counter = int(30)
+    for i in range(codewords):
+        current_code = str(code[i])
+        for j in range(codewords):
+            counter = int(0)
+            if (j + i) < (codewords - 1):
+                comp_code = str(code[i + j + 1])
+                for k in range(len(current_code)):
+                    if current_code[k] != comp_code[k]:
+                        counter = (counter + 1)
+                if (counter < min_dist_counter):
+                    min_dist_counter = counter
+    return (min_dist_counter - 1)
+
+def correct(code, codewords):
+    min_dist_counter = int(30)
+    for i in range(codewords):
+        current_code = str(code[i])
+        for j in range(codewords):
+            counter = int(0)
+            if (j + i) < (codewords - 1):
+                comp_code = str(code[i + j + 1])
+                for k in range(len(current_code)):
+                    if current_code[k] != comp_code[k]:
+                        counter = (counter + 1)
+                if (counter < min_dist_counter):
+                    min_dist_counter = counter
+    return ((min_dist_counter - 1) / 2)
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+2) Given a binary code with minimum distance k, where k is a positive integer, write a program 
+   that will detect errors in codewords in as many as k − 1 positions and correct errors in 
+   as many as [(k − 1) / 2] positions.
+
+def main():
+    codewords = int(amount_of_codewords())
+    code = []
+    code = list_of_codewords(code, codewords)
+    print(code)
+    min_dist = int(mindist(code, codewords))
+    received_codeword = str(rec_codeword(code))
+    errors_detected = []
+    errors_detected = error_detect(received_codeword, code, min_dist, codewords)
+    correct_codeword = error_correct(received_codeword, code, min_dist, codewords)
+    print(f"Errors were found at indicies {errors_detected}, and the corrected codeword would be {correct_codeword}")
+
+def amount_of_codewords():
+    x = int(0)
+    while x < 1:
+        codewords = int(input("""
+How many codewords will this code contain? 
+=> """))
+        if (codewords <= 0):
+            print("Number of codewords must be a positive integer.")
+        else:
+            return codewords 
+
+def list_of_codewords(code, codewords):
+    print("\nType each of the codewords and press Enter until all codewords have been entered.")
+    binary = {'0', '1'}
+    x = int(0)
+    while (x < 1):
+        cword1 = str(input("=> "))
+        string = set(cword1)
+        if (string == binary) or (string == {'1'}) or (string == {'0'}):
+            length = int(len(cword1))
+            code.append(cword1)
+            x = (x + 1)
+        else:
+            print("Codewords must be in a binary format.")
+    y = int(0)
+    while y < (codewords - 1):
+        cword = str(input("=> "))
+        string = set(cword)
+        if len(cword) != length:
+            print("""I'm sorry, all codewords must be the same length in order to determine minimum distance. Try again.""")
+        else:
+            if (string == binary) or (string == {'1'}) or (string == {'0'}):
+                if cword == cword1:
+                    print("Codewords must be unique.")
+                else:
+                    length = int(len(cword))
+                    code.append(cword)
+                    y = int(y + 1)
+            else:
+                print("Codewords must be in a binary format.")
+    return code
+    
+def mindist(code, codewords):
+    min_dist_counter = int(30)
+    for i in range(codewords):
+        current_code = str(code[i])
+        for j in range(codewords):
+            counter = int(0)
+            if (j + i) < (codewords - 1):
+                comp_code = str(code[i + j + 1])
+                for k in range(len(current_code)):
+                    if current_code[k] != comp_code[k]:
+                        counter = (counter + 1)
+                if (counter < min_dist_counter):
+                    min_dist_counter = counter
+    return min_dist_counter
+
+def rec_codeword(code):
+    x = int(0)
+    length = int(len(code[0]))
+    while x < 1:
+        codeword = str(input("""What is the codeword you'd like to detect/correct errors in? 
+    => """))
+        binary = {'0', '1'}
+        string = set(codeword)
+        if ((len(codeword) == length) and ((string == binary) or (string == {'1'}) or (string == {'0'}))):
+            x = (x + 1)
+            return codeword
+        else:
+            print("Codeword must be the same length as all others in the code and must be in binary format.")
+
+def error_detect(rec_codeword, code, min_dist, codewords):
+    k = int(min_dist - 1)
+    current_code = rec_codeword
+    for i in range(codewords):
+        errors = int(0)
+        error_indicies = []
+        comp_code = str(code[i])
+        for j in range(len(current_code)):
+            if current_code[j] != comp_code[j]:
+                errors += 1
+                error_indicies.append(j)
+        if (k >= errors):
+            return error_indicies
+
+def error_correct(rec_codeword, code, min_dist, codewords):
+    k = int((min_dist - 1) / 2)
+    current_code = rec_codeword
+    for i in range(codewords):
+        errors = int(0)
+        comp_code = str(code[i])
+        for j in range(len(current_code)):
+            if current_code[j] != comp_code[j]:
+                errors += 1
+            if (k >= errors):
+                return comp_code
+
+if __name__ == "__main__":
+    main()
+
+
