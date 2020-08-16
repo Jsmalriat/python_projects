@@ -12,9 +12,9 @@ A project using nested methods and user input to make a password checker which o
 
 # Project 3: State Quiz
 
-#
-#
-#
-#
-#
-#
+
+# Project 4: Coding Theory
+
+
+# Misc:
+Assorted unfinished projects such as converting audio into binary data, some audio tool practice, and gui practice.
