@@ -16,7 +16,3 @@ A project using imported data from an unsorted text document to create a quiz on
 
 # Project 4: Coding Theory
 A project showing how Coding Theory works by detecting and correcting possible errors in codewords inputted by a user using Hamming codes. User must understand binary and perfect codes in order to understand how the program is working and what it is doing. 
-
-
-# Misc:
-Assorted unfinished projects such as converting audio into binary data, some audio tool practice, and gui practice.
